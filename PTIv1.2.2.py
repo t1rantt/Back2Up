@@ -11,7 +11,7 @@ parser.add_argument("-u", "--username", help="FTP username")
 parser.add_argument("-p", "--password", help="FTP password")
 parser.add_argument("-f", "--file", help="File containing list of file paths to upload", required=True)
 parser.add_argument("-t", "--type", help="Type of backup (tot, tar, snap, inc)", choices=["tot", "tar", "snap", "inc"], required=True)
-parser.add_argument("-d", "--date", help="Date for incremental backup in %d%m%y%H%M format", type=str, required=True)
+parser.add_argument("-d", "--date", help="Date for incremental backup in %d%m%y%H%M format", type=str)
 args = parser.parse_args()
 
 username = args.username
