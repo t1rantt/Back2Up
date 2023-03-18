@@ -48,7 +48,6 @@ with ftplib.FTP() as ftp:
         file_paths = f.readlines()
 
     if args.type == "tot":
-        # Implement the tot backup option here
         now = datetime.datetime.now()
         folder_name = now.strftime("%d%m%y%H%M")
         backup_folder = os.path.join(ftp_folder, folder_name)
@@ -66,7 +65,6 @@ with ftplib.FTP() as ftp:
                 upload_directory(ftp, file_path, remote_dir_path)
 
     elif args.type == "tar":
-        # Implement the tar backup option here
         now = datetime.datetime.now()
         tarball_name = now.strftime("%d%m%y%H%M") + ".tar.gz"
         tarball_path = os.path.join(os.getcwd(), tarball_name)
@@ -81,7 +79,6 @@ with ftplib.FTP() as ftp:
         os.remove(tarball_path)
 
     elif args.type == "snap":
-        # Implement the snap backup option here
         pass
 
     elif args.type == "inc":
@@ -101,7 +98,6 @@ with ftplib.FTP() as ftp:
         try:
             ftp.cwd(backup_folder)
         except ftplib.error_perm:
-        # If the folder doesn't exist, perform a total backup
             folder_name = now.strftime("%d%m%y%H%M")
             backup_folder = os.path.join(ftp_folder, folder_name)
             ftp.cwd(ftp_folder)
@@ -118,7 +114,6 @@ with ftplib.FTP() as ftp:
                     remote_dir_path = os.path.join(backup_folder, remote_dir_name)
                     upload_directory(ftp, file_path, remote_dir_path)
         else:
-            # Incremental backup
             for file_path in file_paths:
                 file_path = file_path.strip()
                 if os.path.isfile(file_path):
