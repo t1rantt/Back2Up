@@ -15,13 +15,18 @@ parser.add_argument("-p", "--password", help="FTP password")
 parser.add_argument("-f", "--file", help="File containing list of file paths to upload", required=True)
 parser.add_argument("-t", "--type", help="Type of backup (tot, tar, snap, inc)", choices=["tot", "tar", "snap", "inc"], required=True)
 parser.add_argument("-d", "--date", help="Date for incremental backup in %d%m%y%H%M format", type=str)
+parser.add_argument("-c", "--company", help="Company Name", type=str)
 args = parser.parse_args()
 
 username = args.username
 password = args.password
 file_path = args.file
-ftp_folder = "/home/" + args.username + "/backups"
 
+if args.company:
+    ftp_folder = "/home/" + args.company + args.username + "/backups"
+else:
+    ftp_folder = "/home/" + args.username + "/backups"
+    
 def send_email_notification(subject, body):
     sender_email = 'back2upreports@gmail.com'
     receiver_email = "args.mail"
